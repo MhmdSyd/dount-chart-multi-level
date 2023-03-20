@@ -30,15 +30,15 @@ root.setThemes([
 // start and end angle must be set both for chart and series
 var chart = root.container.children.push(am5percent.PieChart.new(root, {
   layout: root.verticalLayout,
-  innerRadius: am5.percent(40)
+  innerRadius: am5.percent(30)
 }));
 
 // Create series
 // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
 // start and end angle must be set both for chart and series
 var series0 = chart.series.push(am5percent.PieSeries.new(root, {
-  valueField: "bottles",
-  categoryField: "country",
+  valueField: "value",
+  categoryField: "type",
   alignLabels: false
 }));
 
@@ -50,13 +50,13 @@ series0.slices.template.setAll({
   stroke: bgColor,
   strokeWidth: 2,
   tooltipText:
-    "{category}: {valuePercentTotal.formatNumber('0.00')}% ({value} bottles)"
+    "{value} {type}"
 });
 series0.slices.template.states.create("hover", { scale: 0.95 });
 
 var series1 = chart.series.push(am5percent.PieSeries.new(root, {
-  valueField: "litres",
-  categoryField: "country",
+  valueField: "value",
+  categoryField: "activities",
   alignLabels: true
 }));
 
@@ -64,56 +64,132 @@ series1.slices.template.setAll({
   stroke: bgColor,
   strokeWidth: 2,
   tooltipText:
-    "{category}: {valuePercentTotal.formatNumber('0.00')}% ({value} litres)"
+    "{value} {activities}"
+});
+
+
+var series2 = chart.series.push(am5percent.PieSeries.new(root, {
+  valueField: "value",
+  categoryField: "sponser",
+  alignLabels: true
+}));
+
+series2.slices.template.setAll({
+  stroke: bgColor,
+  strokeWidth: 2,
+  tooltipText:
+    "{sponser}"
 });
 
 var data = [{
-  country: "Lithuania",
-  litres: 501.9,
-  bottles: 1500
+  type: "مشروع",
+  activities: "نثر بذور",
+  sponser: "مبادرات",
+  fund :true,
+  value:1
+},{
+  type: "مشروع",
+  activities: "زراعة شتلات",
+  sponser: "مبادرات",
+  fund :true,
+  value:1
 }, {
-  country: "Czech Republic",
-  litres: 301.9,
-  bottles: 990
+  type: "مشروع",
+  activities: "زراعة اشجار",
+  sponser: "ميزانية عامة",
+  fund :true,
+  value:1
 }, {
-  country: "Ireland",
-  litres: 201.1,
-  bottles: 785
+  type: "مشروع",
+  activities: "ري أشجار",
+  sponser: "ميزانية عامة",
+  fund :true,
+  value:1
 }, {
-  country: "Germany",
-  litres: 165.8,
-  bottles: 255
+  type: "مشروع",
+  activities: "تقليم أشجار",
+  sponser: "مكاسب سريعة",
+  fund :true,
+  value:1
 }, {
-  country: "Australia",
-  litres: 139.9,
-  bottles: 452
+  type: "مشروع",
+  activities: "تسييج",
+  sponser: "مكاسب سريعة",
+  fund :true,
+  value:1
 }, {
-  country: "Austria",
-  litres: 128.3,
-  bottles: 332
+  type: "مشروع",
+  activities: "نظافة",
+  sponser: "شراكات",
+  fund :true,
+  value:1
 }, {
-  country: "UK",
-  litres: 99,
-  bottles: 150
+  type: "مشروع",
+  activities: "جمع بذور",
+  sponser: "شراكات",
+  fund :true,
+  value:1
+},{
+  type: "حملة",
+  activities: "نثر بذور",
+  sponser: "Public",
+  fund :false,
+  value:1
+},{
+  type: "حملة",
+  activities: "زراعة شتلات",
+  sponser: "Indvidual",
+  fund :false,
+  value:1
 }, {
-  country: "Belgium",
-  litres: 60,
-  bottles: 178
+  type: "حملة",
+  activities: "زراعة اشجار",
+  sponser: "ميزانية عامة",
+  fund :false,
+  value:1
 }, {
-  country: "The Netherlands",
-  litres: 50,
-  bottles: 50
+  type: "حملة",
+  activities: "ري أشجار",
+  sponser: "Indvidual",
+  fund :false,
+  value:1
+}, {
+  type: "حملة",
+  activities: "تقليم أشجار",
+  sponser: "Public",
+  fund :false,
+  value:1
+}, {
+  type: "حملة",
+  activities: "تسييج",
+  sponser: "Private",
+  fund :false,
+  value:1
+}, {
+  type: "حملة",
+  activities: "نظافة",
+  sponser: "Private",
+  fund :false,
+  value:1
+}, {
+  type: "حملة",
+  activities: "جمع بذور",
+  sponser: "Non-Profit",
+  fund :false,
+  value:1
 }];
 
 // Set data
 // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
 series0.data.setAll(data);
 series1.data.setAll(data);
+series2.appear(1000, 100);
 
 // Play initial series animation
 // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
 series0.appear(1000, 100);
 series1.appear(1000, 100);
+series2.appear(1000, 100);
 
 }); // end am5.ready()
 </script>
